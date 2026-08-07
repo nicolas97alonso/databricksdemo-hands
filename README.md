@@ -21,6 +21,7 @@ Your objective for this chapter is to set up your environment, establish databas
 > - Implement these tasks using SQL and Spark Python in your Databricks Workspace.
 > - Do not copy-paste code. Try to write queries from memory or reference the Databricks official documentation to learn syntax.
 > - **Folder & Git Integration:** You can link this repository directly to your Databricks workspace using Databricks Git Folders (formerly Repos) to maintain file and folder structures directly inside Databricks.
+> - **Reference Material:** If you get stuck, compare your approach with the teacher's official course repository located at `/Users/nicolasalonso/Desktop/code/projects/databricks-prep/da-prep/Databricks-Certified-Data-Engineer-Associate`.
 > - You can check your progress against the checkpoint details in [AGENTS.md](file:///Users/nicolasalonso/Desktop/code/projects/databricks-prep/da-prep/nico-project/AGENTS.md).
 
 > [!NOTE]
