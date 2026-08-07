@@ -20,7 +20,13 @@ Your objective for this chapter is to set up your environment, establish databas
 > **Rules of the Game:**
 > - Implement these tasks using SQL and Spark Python in your Databricks Workspace.
 > - Do not copy-paste code. Try to write queries from memory or reference the Databricks official documentation to learn syntax.
+> - **Folder & Git Integration:** You can link this repository directly to your Databricks workspace using Databricks Git Folders (formerly Repos) to maintain file and folder structures directly inside Databricks.
 > - You can check your progress against the checkpoint details in [AGENTS.md](file:///Users/nicolasalonso/Desktop/code/projects/databricks-prep/da-prep/nico-project/AGENTS.md).
+
+> [!NOTE]
+> **Metastore & Storage Disclaimer:**
+> - **Legacy Hive Metastore:** Part 1 of this project is explicitly designed around the **Legacy Hive Metastore** (using the `hive_metastore` catalog). We do this so you can practice working with custom storage locations (`LOCATION` parameter) and standard DBFS paths without needing cloud credential setup. We will transition to modern **Unity Catalog (UC)** governance in **Part 5**.
+> - **Managed Tables Production Warning:** In a legacy Hive Metastore setup, storing managed tables directly in the default hive warehouse (DBFS root) is **not recommended** for production environments because it lacks granular security controls and dropping a table deletes all data permanently. We practice it here strictly to observe table behaviors. In Unity Catalog, managed tables are the recommended best practice because they use secure, catalog-defined managed storage.
 
 ---
 
@@ -31,12 +37,19 @@ Your objective for this chapter is to set up your environment, establish databas
    - **Databricks Runtime (DBR):** Choose an LTS version (e.g., `13.3 LTS` or `14.3 LTS`).
    - **Worker Type / Node Type:** Select the smallest available instance (e.g., 4 cores).
    - **Auto Termination:** Configure it to terminate after **20 or 30 minutes** of inactivity to save costs.
-3. Create a new notebook named `1.0_lakehouse_platform_practice` inside your workspace and attach it to your cluster.
+3. In your Databricks Workspace (inside your Git Folder or personal workspace folder), create a folder structure to organize your notebooks logically. Save each task set in its respective subfolder:
+   - `01_lakehouse_platform/`
+     - `01_setup/01_setup_and_schemas.sql` (For Task 1 & Task 2)
+     - `02_ingestion/02_delta_table_basics.sql` (For Task 3 & Task 4)
+     - `03_time_travel/03_time_travel_and_restore.sql` (For Task 5)
+     - `04_optimization/04_optimization_and_cleanup.sql` (For Task 6 & Task 7)
+     - `05_managed_vs_external/05_managed_vs_external.sql` (For Task 8)
+     - `06_views/06_views.sql` (For Task 9)
 
-### Task 2: Schema & Database Architecture
-Define where and how your retail data is stored by setting up isolated schemas (databases).
-1. Create a schema called `aura_raw_external` with a custom location pointing to DBFS (`dbfs:/mnt/aura/raw/`). This schema will simulate the landing zone for external data files.
-2. Create another schema called `aura_gold_managed` without specifying a custom location. This schema will hold default managed tables for business-level reporting.
+### Task 2: Schema & Database Architecture (Legacy Hive Metastore)
+Define where and how your retail data is stored by setting up isolated schemas (databases) in the legacy Hive Metastore.
+1. Create a schema called `hive_metastore.aura_raw_external` with a custom location pointing to DBFS (`dbfs:/mnt/aura/raw/`). This schema will simulate the landing zone for external data files.
+2. Create another schema called `hive_metastore.aura_gold_managed` without specifying a custom location. This schema will hold default managed tables for business-level reporting.
 3. Verify the details of both schemas using Spark SQL commands. Confirm which one maps to the default hive warehouse path and which one points to your custom DBFS location.
 
 ### Task 3: Delta Table Creation & Exploration
@@ -80,7 +93,9 @@ Manage storage costs by pruning stale historical files.
 
 ### Task 8: Managed vs. External Tables
 Observe what happens when you drop tables.
-1. In `aura_gold_managed` (the default database/schema), create a managed table named `sales_summary` by selecting aggregated metrics from `store_sales`.
+> [!WARNING]
+> **Production Disclaimer:** Remember that in a legacy Hive Metastore setup, using managed tables on the DBFS root is not recommended for production. Dropping a managed table deletes both its metadata and its underlying physical data files. In Unity Catalog, managed tables are the standard because they are written to a managed, secure storage area rather than a shared root directory.
+1. In `hive_metastore.aura_gold_managed` (the default database/schema), create a managed table named `sales_summary` by selecting aggregated metrics from `store_sales`.
 2. Compare the storage paths and metadata of `store_sales` (external) vs `sales_summary` (managed) using `DESCRIBE EXTENDED`.
 3. Drop both tables.
 4. Use `%fs ls` to inspect both backing directories. What happened to the physical parquet files for the managed table? What happened to the files for the external table?
@@ -98,4 +113,4 @@ Analyze how to share and limit access to data using views.
 ---
 
 ## 🏁 Checkpoint Verification
-Once you complete all tasks in Part 1, update the checkpoint status in [AGENTS.md](file:///Users/nicolasalonso/Desktop/code/projects/databricks-prep/da-prep/nico-project/AGENTS.md) and let your AI assistant know. We will review your SQL script/notebook, run check queries to verify correctness, and if everything looks solid, we will unlock **Part 2 (ELT with Spark SQL and Python)**!
+Once you complete all tasks in Part 1, update the checkpoint status in [AGENTS.md](file:///Users/nicolasalonso/Desktop/code/projects/databricks-prep/da-prep/nico-project/AGENTS.md) and let your AI assistant know. We will review your SQL scripts inside the `practice/01_lakehouse_platform/` subdirectory, run check queries to verify correctness, and if everything looks solid, we will unlock **Part 2 (ELT with Spark SQL and Python)**!
