@@ -36,18 +36,18 @@ This file tracks the alignment and milestones between you (the student) and your
 Once you have completed all tasks in your Databricks workspace:
 1. Export your practice notebooks/scripts.
 2. Save them inside this `nico-project` directory under the following structure:
-   - `practice/01_lakehouse_platform/01_setup/01_setup_and_schemas.sql`
-   - `practice/01_lakehouse_platform/02_ingestion/02_delta_table_basics.sql`
-   - `practice/01_lakehouse_platform/03_time_travel/03_time_travel_and_restore.sql`
-   - `practice/01_lakehouse_platform/04_optimization/04_optimization_and_cleanup.sql`
-   - `practice/01_lakehouse_platform/05_managed_vs_external/05_managed_vs_external.sql`
-   - `practice/01_lakehouse_platform/06_views/06_views.sql`
+   - `01_lakehouse_platform/01_setup/01_setup_and_schemas.sql`
+   - `01_lakehouse_platform/02_ingestion/02_delta_table_basics.sql`
+   - `01_lakehouse_platform/03_time_travel/03_time_travel_and_restore.sql`
+   - `01_lakehouse_platform/04_optimization/04_optimization_and_cleanup.sql`
+   - `01_lakehouse_platform/05_managed_vs_external/05_managed_vs_external.sql`
+   - `01_lakehouse_platform/06_views/06_views.sql`
 3. Commit and push your changes to your git repository.
 4. Notify Antigravity in our chat that you are ready.
 
 ### Agent Verification Checklist:
 When you request verification, Antigravity will:
-1. Read your practice scripts/SQL files under `practice/01_lakehouse_platform/` in this workspace.
+1. Read your practice scripts/SQL files under `01_lakehouse_platform/` in this workspace.
 2. Review the SQL query structures (checking for correct use of `LOCATION`, `RESTORE`, `OPTIMIZE ZORDER BY`, `VACUUM RETAIN 0 HOURS`, `GLOBAL TEMP` namespace prefix, etc.).
 3. Verify that your implementation addresses all core concepts without syntax errors.
 4. Update this checkpoint status to **✅ COMPLETED**, unlock Part 2, and populate the README/AGENTS.md with the next set of tasks!
