@@ -34,23 +34,38 @@ This file tracks the alignment and milestones between you (the student) and your
 ## 🔍 How to Submit for Verification
 
 Once you have completed all tasks in your Databricks workspace:
-1. Export your practice notebooks/scripts.
+1. Export your practice notebooks.
 2. Save them inside this `nico-project` directory under the following structure:
-   - `01_lakehouse_platform/01_setup/01_setup_and_schemas.sql`
-   - `01_lakehouse_platform/02_ingestion/02_delta_table_basics.sql`
-   - `01_lakehouse_platform/03_time_travel/03_time_travel_and_restore.sql`
-   - `01_lakehouse_platform/04_optimization/04_optimization_and_cleanup.sql`
-   - `01_lakehouse_platform/05_managed_vs_external/05_managed_vs_external.sql`
-   - `01_lakehouse_platform/06_views/06_views.sql`
+   - `01_lakehouse_platform/01_setup/01_setup_and_schemas.ipynb`
+   - `01_lakehouse_platform/02_ingestion/02_delta_table_basics.ipynb`
+   - `01_lakehouse_platform/03_time_travel/03_time_travel_and_restore.ipynb`
+   - `01_lakehouse_platform/04_optimization/04_optimization_and_cleanup.ipynb`
+   - `01_lakehouse_platform/05_managed_vs_external/05_managed_vs_external.ipynb`
+   - `01_lakehouse_platform/06_views/06_views.ipynb`
 3. Commit and push your changes to your git repository.
 4. Notify Antigravity in our chat that you are ready.
 
 ### Agent Verification Checklist:
 When you request verification, Antigravity will:
-1. Read your practice scripts/SQL files under `01_lakehouse_platform/` in this workspace.
+1. Read your practice notebooks under `01_lakehouse_platform/` in this workspace.
 2. Review the SQL query structures (checking for correct use of `RESTORE`, `OPTIMIZE ZORDER BY`, `VACUUM RETAIN 0 HOURS`, `GLOBAL TEMP` namespace prefix, etc.).
 3. Verify that your implementation addresses all core concepts without syntax errors.
 4. Update this checkpoint status to **✅ COMPLETED**, unlock Part 2, and populate the README/AGENTS.md with the next set of tasks!
+
+---
+
+## 🎨 Notebook Formatting Style Guide
+
+To maintain professional, uniform, and clean learning notebooks, we adhere to the following standards:
+
+1. **Title & Info Header:** Each notebook must begin with a Markdown cell containing:
+   - `# Title` (e.g. `# 01 - Setup and Schemas`)
+   - **Description:** Bullet points explaining the purpose of the notebook.
+   - **Key Concepts Covered:** Quick tags of features practiced.
+2. **Section Headings:** Major task boundaries must be introduced with a `## Section Title` Markdown cell.
+3. **Keyword Casing:** All SQL keywords (`CREATE TABLE`, `SELECT`, `WHERE`, `OPTIMIZE`, `ZORDER BY`, `VACUUM`, `RESTORE`, `CREATE VIEW`) must be written in UPPERCASE.
+4. **Namespace Explicitly Specified:** Always qualify table references when appropriate, or define the active catalog and schema clearly at the start of the notebook.
+5. **No Broken Cells:** Ensure code is debugged (e.g., Python variables are fully declared).
 
 ---
 
